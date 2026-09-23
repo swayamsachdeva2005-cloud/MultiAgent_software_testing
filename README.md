@@ -1,4 +1,4 @@
-# 🤖 AI Software Engineering Assistant
+# AI Software Engineering Assistant
 
 An AI-powered **Software Engineering Assistant** built using the **OpenAI Agents SDK**, **LiteLLM**, and **Google Gemini**.
 
@@ -6,7 +6,7 @@ This project demonstrates how multiple specialized AI agents can collaborate to 
 
 ---
 
-## 🚀 Project Overview
+##  Project Overview
 
 Software development involves many repetitive and time-consuming tasks such as:
 
@@ -26,7 +26,7 @@ The agents are powered by **Gemini 2.5 Flash** through **LiteLLM** and coordinat
 
 ---
 
-## 🏗️ Architecture
+##  Architecture
 
 The project follows a multi-agent architecture where different agents specialize in different software engineering tasks.
 
@@ -67,7 +67,7 @@ The project follows a multi-agent architecture where different agents specialize
 
 ---
 
-## 🧠 Agents Implemented
+##  Agents Implemented
 
 ### 1. Requirements Analysis Agent
 
@@ -226,7 +226,7 @@ This allows an agent workflow to maintain conversational context across interact
 
 ---
 
-## 🛠️ Technologies Used
+##  Technologies Used
 
 | Technology        | Purpose                                 |
 | ----------------- | --------------------------------------- |
@@ -244,7 +244,7 @@ This allows an agent workflow to maintain conversational context across interact
 
 ---
 
-## 🔄 Development Workflow
+##  Development Workflow
 
 The main workflow demonstrated in the project is:
 
@@ -280,7 +280,7 @@ This creates an iterative AI-assisted software engineering workflow.
 
 ---
 
-## 🔐 Example: FastAPI Login Problem
+##  Example: FastAPI Login Problem
 
 The project uses a FastAPI login endpoint as an example problem.
 
@@ -367,7 +367,7 @@ The testing agent is also instructed not to claim tests passed unless actual tes
 
 ---
 
-## 🔗 GitHub Issue Integration
+##  GitHub Issue Integration
 
 The project uses the GitHub API to retrieve public issues.
 
@@ -403,7 +403,7 @@ Technical Requirements
 
 ---
 
-## 🧰 Agent Tools
+##  Agent Tools
 
 The project demonstrates function tools including:
 
@@ -419,7 +419,7 @@ These tools allow agents to interact with the development environment instead of
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 A recommended GitHub repository structure is:
 
@@ -441,7 +441,7 @@ AI-Software-Engineering-Assistant/
 
 ---
 
-## ⚙️ Installation
+##  Installation
 
 ### 1. Clone the repository
 
@@ -472,7 +472,7 @@ pip install -r requirements.txt
 
 ---
 
-## 🔑 API Key Configuration
+##  API Key Configuration
 
 The notebook uses a Gemini API key through Google Colab secrets.
 
@@ -492,7 +492,7 @@ Create a Gemini API key and store it securely.
 Do not put keys directly inside your source code:
 
 ```python
-# ❌ Don't do this
+#  Don't do this
 GEMINI_API_KEY = "your-secret-key"
 ```
 
@@ -500,7 +500,7 @@ Use environment variables or secret managers instead.
 
 ---
 
-## ▶️ Running the Project
+##  Running the Project
 
 The primary project is implemented as a Google Colab notebook.
 
@@ -521,7 +521,7 @@ Then:
 
 ---
 
-## 📌 Example Usage
+##  Example Usage
 
 A user can provide a problem such as:
 
@@ -552,28 +552,28 @@ Generate Documentation
 
 ---
 
-## 📊 Key Features
+##  Key Features
 
-* 🤖 Multi-agent software engineering workflow
-* 🧠 Gemini-powered reasoning
-* 🔀 Agent handoffs
-* 🛠️ Function/tool calling
-* 📋 Structured outputs with Pydantic
-* 🔍 Requirements analysis
-* 💻 Code generation
-* 👀 Code review
-* 🧪 Automated testing
-* 🐛 Bug investigation
-* 🔐 Security analysis
-* 📄 Documentation generation
-* 📂 File analysis
-* 🐙 GitHub issue analysis
-* 💬 Conversation memory
-* 🔄 Iterative code improvement
+*  Multi-agent software engineering workflow
+*  Gemini-powered reasoning
+*  Agent handoffs
+*  Function/tool calling
+*  Structured outputs with Pydantic
+*  Requirements analysis
+*  Code generation
+*  Code review
+*  Automated testing
+*  Bug investigation
+*  Security analysis
+*  Documentation generation
+*  File analysis
+*  GitHub issue analysis
+*  Conversation memory
+*  Iterative code improvement
 
 ---
 
-## ⚠️ Limitations
+##  Limitations
 
 This project is a capstone/prototype implementation rather than a production-ready autonomous coding platform.
 
@@ -594,7 +594,7 @@ For production use, additional features would be required, including:
 
 ---
 
-## 🚀 Future Improvements
+##  Future Improvements
 
 Possible future enhancements include:
 
@@ -613,7 +613,7 @@ Possible future enhancements include:
 
 ---
 
-## 🎯 Learning Outcomes
+##  Learning Outcomes
 
 Through this project, the following concepts are demonstrated:
 
@@ -634,7 +634,7 @@ Through this project, the following concepts are demonstrated:
 
 ---
 
-## 👨‍💻 Author
+##  Author
 
 **Swayam Sachdeva**
 
@@ -651,8 +651,8 @@ Interested in:
 
 ---
 
-## ⭐ Acknowledgements
+##  Acknowledgements
 
 This project was developed as a capstone project exploring **AI agents and AI-assisted software engineering workflows**.
 
-If you find this project useful, consider giving the repository a ⭐ on GitHub.
+
