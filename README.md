@@ -1,658 +1,131 @@
 # AI Software Engineering Assistant
 
-An AI-powered **Software Engineering Assistant** built using the **OpenAI Agents SDK**, **LiteLLM**, and **Google Gemini**.
+A multi-agent software-engineering prototype built in Google Colab using the **OpenAI Agents SDK**, **LiteLLM**, and **Gemini 2.5 Flash**. It demonstrates how specialized AI agents can support requirements analysis, code generation, code review, testing support, debugging, and documentation.
 
-This project demonstrates how multiple specialized AI agents can collaborate to support developers throughout the software development lifecycle — from understanding requirements to writing code, reviewing it, testing it, debugging issues, analyzing GitHub issues, and generating documentation.
+> **Project status:** Capstone prototype. Individual agent workflows are demonstrated, but this is not presented as a fully autonomous, production-ready end-to-end system.
 
----
+## Highlights
 
-##  Project Overview
+- **Requirements analysis** — converts a software problem into structured requirements and acceptance criteria.
+- **Code generation** — proposes an implementation from the analyzed requirements.
+- **Code review** — reviews potential bugs, security concerns, readability, maintainability, and edge cases.
+- **Testing support** — generates test cases and potential-failure analysis.
+- **Test execution support** — the notebook includes a `pytest` tool; verify results in your own run before relying on them.
+- **Bug investigation** — analyzes reported bugs, root causes, and recommended fixes.
+- **Documentation generation** — creates setup, usage, and project documentation.
+- **Code-file and GitHub issue analysis** — demonstrates supporting tools for inspecting source files and public issues.
+- **Structured outputs** — uses Pydantic models for consistent, inspectable agent responses.
 
-Software development involves many repetitive and time-consuming tasks such as:
+## Tech Stack
 
-* Understanding software requirements
-* Writing implementation code
-* Reviewing code quality
-* Finding bugs and security vulnerabilities
-* Creating test cases
-* Running tests
-* Analyzing GitHub issues
-* Maintaining project documentation
-* Inspecting project files
+- Python and Google Colab / Jupyter Notebook
+- OpenAI Agents SDK
+- LiteLLM
+- Gemini 2.5 Flash
+- Pydantic
+- pytest
+- GitHub REST API
 
-This project creates an **AI Software Engineering Assistant** that uses multiple specialized agents to automate and assist with these tasks.
+## Architecture
 
-The agents are powered by **Gemini 2.5 Flash** through **LiteLLM** and coordinated using the **OpenAI Agents SDK**.
+The prototype separates software-engineering responsibilities into specialized agents. The diagram summarizes the intended design; it does not imply that every step runs as one fully automated pipeline.
 
----
+![Multi-agent workflow](assets/multiagent_workflow.jpeg)
 
-##  Architecture
+## Screenshots
 
-The project follows a multi-agent architecture where different agents specialize in different software engineering tasks.
+The following screenshots were selected from the screenshots you provided and arranged in a logical order for the README. They show notebook code and/or outputs from the demonstrated workflow.
 
-```text
-                         ┌─────────────────────┐
-                         │        User         │
-                         └──────────┬──────────┘
-                                    │
-                                    ▼
-                    ┌────────────────────────────┐
-                    │ AI Software Engineering    │
-                    │        Assistant           │
-                    └─────────────┬──────────────┘
-                                  │
-              ┌───────────────────┼───────────────────┐
-              │                   │                   │
-              ▼                   ▼                   ▼
-       Requirements         Coding Assistant      GitHub Agent
-          Agent                   │                   │
-              │                   ▼                   ▼
-              │             Code Reviewer      Issue Analysis
-              │                   │
-              │                   ▼
-              │             Testing Agent
-              │                   │
-              │                   ▼
-              │          Bug Investigation
-              │                   │
-              │                   ▼
-              │             Documentation
-              │
-              └──────────────────────────────────────┐
-                                                     │
-                                                     ▼
-                                          Final Development
-                                             Assistance
-```
+### 1. Requirements Analysis
 
----
+![Requirements analysis](screenshots/01-requirements-analysis.png)
 
-##  Agents Implemented
+*Extracts the problem, expected behavior, technical requirements, and acceptance criteria.*
 
-### 1. Requirements Analysis Agent
+### 2. Code Generation
 
-Analyzes software problems and identifies:
+![Code generation](screenshots/02-code-generation.png)
 
-* Main problem
-* Expected behavior
-* Affected components
-* Technical requirements
-* Acceptance criteria
+*The Coding Assistant uses the analyzed requirements to propose an implementation.*
 
-The output is structured using **Pydantic models**.
+### 3. Code Review
 
----
+![Code review](screenshots/03-code-review.png)
 
-### 2. Coding Assistant
+*The reviewer agent inspects the generated code and reports review findings.*
 
-Converts analyzed requirements into an implementation.
+### 4. Testing Agent Output
 
-It generates:
+![Testing agent output](screenshots/04-testing-agent-output.png)
 
-* Solution explanation
-* Source code
-* Files that need modification
+*The testing workflow defines test cases and discusses potential failures. This screenshot is not presented as proof that all tests passed.*
 
-The agent is instructed to produce clean and secure Python code.
+### 5. Debugging and Recommended Fixes
 
----
+![Debugging findings](screenshots/05-debugging-findings.png)
 
-### 3. Code Reviewer
+*The debugging agent identifies potential bugs, root causes, and recommended fixes.*
 
-Reviews generated code for:
+### 6. Generated Documentation
 
-* Correctness
-* Bugs
-* Security issues
-* Readability
-* Maintainability
-* Edge cases
+![Generated documentation](screenshots/06-documentation-output.png)
 
-It also determines whether the solution should be approved.
+*The documentation workflow produces setup and endpoint-testing guidance.*
 
----
+## Run the Notebook
 
-### 4. Testing Agent
+1. Open [Google Colab](https://colab.research.google.com/).
+2. Upload `sdk_final_capstone_project.ipynb`.
+3. Add your Gemini API key through Colab Secrets using the secret name expected by the notebook.
+4. Install any dependencies required by the notebook.
+5. Run the cells in order and review each agent's output.
 
-Analyzes the generated solution and creates test scenarios covering:
+Model availability, API quotas, and package versions can affect execution.
 
-* Normal cases
-* Invalid inputs
-* Edge cases
-* Authentication failures
-* Validation failures
+## Security and Responsible Use
 
-The project also demonstrates a testing agent with a real `pytest` execution tool.
+- Never commit API keys, access tokens, or other secrets.
+- Use environment variables or Colab Secrets for credentials.
+- Review AI-generated code before using it in a real application.
+- Run generated code and tests only in an environment you control.
+- Model responses may be incorrect; human review and deterministic testing remain important.
 
----
+## Current Limitations
 
-### 5. Bug Investigation Agent
+- This is a prototype demonstrated through notebook workflows, not a production deployment.
+- A handoff execution encountered a Gemini quota error during the documented run.
+- A complete persistent multi-turn workflow is not demonstrated.
+- A fully automated, end-to-end code modification lifecycle is not demonstrated.
+- Reliable orchestration, retries/provider fallback, production security, and CI/CD integration remain future improvements.
 
-Analyzes:
+## Future Improvements
 
-* Source code
-* Code review results
-* Testing results
+- Connect individual agents into a reliable orchestrated workflow.
+- Complete and validate handoffs between specialist agents.
+- Add persistent project context and safer sandboxed file modification.
+- Add retries and provider fallback for quota or availability errors.
+- Expand testing, static analysis, and repository-wide code search.
+- Add CI/CD integration and automated pull-request review.
 
-It identifies:
-
-* Bugs
-* Root causes
-* Severity
-* Recommended fixes
-
-The project demonstrates iterative improvement by feeding these findings back to the coding agent.
-
----
-
-### 6. Documentation Agent
-
-Generates technical documentation containing:
-
-* Project summary
-* Changes made
-* Setup instructions
-* Usage instructions
-
----
-
-### 7. Code File Analyst
-
-The project demonstrates tool-using agents that can:
-
-* Read files
-* Search source code
-* Analyze project files
-
-Example tools include:
-
-```python
-read_file()
-search_code()
-```
-
----
-
-### 8. GitHub Requirements Analysis Agent
-
-The project integrates with the GitHub API to retrieve public GitHub issues.
-
-It can analyze:
-
-* Issue title
-* Issue description
-* Software problem
-* Expected behavior
-* Affected components
-* Technical requirements
-
-The notebook demonstrates analysis of a GitHub issue from the Flask repository.
-
----
-
-### 9. Handoff Agent
-
-The project demonstrates **agent handoffs**, where one specialized agent transfers a task to another specialized agent.
-
-Example:
+## Repository Structure
 
 ```text
-User
-  │
-  ▼
-Requirements Agent
-  │
-  │ Handoff
-  ▼
-Coding Agent
-  │
-  ▼
-Implementation
-```
-
-This allows different agents to specialize in different parts of the development workflow.
-
----
-
-### 10. Conversation Memory
-
-The project also demonstrates conversational memory using:
-
-```python
-OpenAIConversationsSession
-```
-
-This allows an agent workflow to maintain conversational context across interactions.
-
----
-
-##  Technologies Used
-
-| Technology        | Purpose                                 |
-| ----------------- | --------------------------------------- |
-| Python            | Core programming language               |
-| OpenAI Agents SDK | Multi-agent orchestration               |
-| LiteLLM           | Model/provider integration              |
-| Google Gemini     | Large Language Model                    |
-| Gemini 2.5 Flash  | Primary AI model                        |
-| Pydantic          | Structured agent outputs and validation |
-| FastAPI           | Example API/application                 |
-| bcrypt            | Password hashing                        |
-| Pytest            | Automated testing                       |
-| GitHub API        | GitHub issue retrieval                  |
-| Google Colab      | Development environment                 |
-
----
-
-##  Development Workflow
-
-The main workflow demonstrated in the project is:
-
-```text
-Software Problem
-       │
-       ▼
-Requirements Analysis
-       │
-       ▼
-Code Generation
-       │
-       ▼
-Code Review
-       │
-       ▼
-Testing
-       │
-       ▼
-Bug Investigation
-       │
-       ▼
-Fix Generation
-       │
-       ▼
-Second Code Review
-       │
-       ▼
-Documentation
-```
-
-This creates an iterative AI-assisted software engineering workflow.
-
----
-
-##  Example: FastAPI Login Problem
-
-The project uses a FastAPI login endpoint as an example problem.
-
-### Initial Problem
-
-```text
-My FastAPI login endpoint crashes when
-the password field is empty.
-```
-
-The Requirements Agent analyzes the problem and produces structured requirements.
-
-The Coding Agent then generates a solution.
-
-The Code Reviewer identifies issues such as:
-
-* Hardcoded credentials
-* Weak password validation
-* Maintainability concerns
-
-The Bug Investigation Agent then analyzes these problems and recommends fixes.
-
----
-
-## 🔧 Security Improvements
-
-The improved solution demonstrates several security improvements:
-
-### Password Hashing
-
-Instead of storing plaintext passwords, the improved version uses:
-
-```python
-bcrypt.hashpw()
-```
-
-and verifies passwords using:
-
-```python
-bcrypt.checkpw()
-```
-
-### Improved Password Validation
-
-The solution also handles:
-
-* Empty passwords
-* Whitespace-only passwords
-* Missing password fields
-
-### Centralized Error Messages
-
-Validation messages are stored in a centralized dictionary:
-
-```python
-ERROR_MESSAGES = {
-    "password_empty": "...",
-    "password_required": "...",
-    "validation_error_default": "..."
-}
-```
-
----
-
-## 🧪 Testing
-
-The project demonstrates automated testing using `pytest`.
-
-Example test cases include:
-
-* Valid login
-* Invalid password
-* Invalid username
-* Empty password
-
-The notebook reports:
-
-```text
-4 tests passed
-0 tests failed
-```
-
-The testing agent is also instructed not to claim tests passed unless actual test execution confirms the result.
-
----
-
-##  GitHub Issue Integration
-
-The project uses the GitHub API to retrieve public issues.
-
-Example tool:
-
-```python
-get_github_issue(
-    owner,
-    repo,
-    issue_number
-)
-```
-
-The agent then analyzes the retrieved issue instead of inventing issue information.
-
-Example workflow:
-
-```text
-GitHub Repository
-       │
-       ▼
-GitHub API
-       │
-       ▼
-Issue Retrieval
-       │
-       ▼
-Requirements Analysis Agent
-       │
-       ▼
-Technical Requirements
-```
-
----
-
-##  Agent Tools
-
-The project demonstrates function tools including:
-
-```python
-read_file()
-write_file()
-search_code()
-run_tests()
-get_github_issue()
-```
-
-These tools allow agents to interact with the development environment instead of only generating text.
-
----
-
-##  Project Structure
-
-A recommended GitHub repository structure is:
-
-```text
-AI-Software-Engineering-Assistant/
-│
+ai-software-engineering-assistant/
 ├── README.md
 ├── sdk_final_capstone_project.ipynb
-│
-├── sample_app.py
-├── test_sample_app.py
-│
-├── requirements.txt
-│
-└── .gitignore
+├── assets/
+│   └── multiagent_workflow.jpeg
+├── screenshots/
+│   ├── 01-requirements-analysis.png
+│   ├── 02-code-generation.png
+│   ├── 03-code-review.png
+│   ├── 04-testing-agent-output.png
+│   ├── 05-debugging-findings.png
+│   └── 06-documentation-output.png
+└── docs/
+    └── AI_Software_Engineering_Assistant_Technical_Documentation.pdf
 ```
 
-> The uploaded notebook contains the complete experimental implementation and demonstrations.
-
----
-
-##  Installation
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/YOUR-USERNAME/AI-Software-Engineering-Assistant.git
-cd AI-Software-Engineering-Assistant
-```
-
-### 2. Install dependencies
-
-```bash
-pip install openai-agents
-pip install litellm
-pip install google-generativeai
-pip install fastapi
-pip install uvicorn
-pip install pydantic
-pip install bcrypt
-pip install pytest
-pip install requests
-```
-
-Or install from a requirements file:
-
-```bash
-pip install -r requirements.txt
-```
-
----
-
-##  API Key Configuration
-
-The notebook uses a Gemini API key through Google Colab secrets.
-
-Example:
-
-```python
-from google.colab import userdata
-import os
-
-os.environ["GEMINI_API_KEY"] = userdata.get("GEMINI_API_KEY")
-```
-
-Create a Gemini API key and store it securely.
-
-**Never commit API keys to GitHub.**
-
-Do not put keys directly inside your source code:
-
-```python
-#  Don't do this
-GEMINI_API_KEY = "your-secret-key"
-```
-
-Use environment variables or secret managers instead.
-
----
-
-##  Running the Project
-
-The primary project is implemented as a Google Colab notebook.
-
-Open:
-
-```text
-sdk_final_capstone_project.ipynb
-```
-
-Then:
-
-1. Open the notebook in Google Colab.
-2. Add your `GEMINI_API_KEY` to Colab Secrets.
-3. Run the installation cell.
-4. Run the initialization cells.
-5. Execute the agent demonstrations.
-6. Experiment with different software engineering problems.
-
----
-
-##  Example Usage
-
-A user can provide a problem such as:
-
-```text
-My FastAPI login endpoint crashes when
-the password field is empty.
-```
-
-The system can then:
-
-```text
-Analyze Requirements
-        ↓
-Generate Code
-        ↓
-Review Code
-        ↓
-Generate Tests
-        ↓
-Investigate Bugs
-        ↓
-Generate Improved Code
-        ↓
-Review Again
-        ↓
-Generate Documentation
-```
-
----
-
-##  Key Features
-
-*  Multi-agent software engineering workflow
-*  Gemini-powered reasoning
-*  Agent handoffs
-*  Function/tool calling
-*  Structured outputs with Pydantic
-*  Requirements analysis
-*  Code generation
-*  Code review
-*  Automated testing
-*  Bug investigation
-*  Security analysis
-*  Documentation generation
-*  File analysis
-*  GitHub issue analysis
-*  Conversation memory
-*  Iterative code improvement
-
----
-
-##  Limitations
-
-This project is a capstone/prototype implementation rather than a production-ready autonomous coding platform.
-
-Some components are demonstrated using simulated or example environments.
-
-For production use, additional features would be required, including:
-
-* Secure authentication
-* Real database integration
-* Secure JWT generation
-* Rate limiting
-* Sandboxed code execution
-* Permission management
-* Better error recovery
-* Production-grade logging
-* Comprehensive automated testing
-* Secret management
-
----
-
-##  Future Improvements
-
-Possible future enhancements include:
-
-* GitHub pull-request analysis
-* Automatic pull-request generation
-* Repository-wide code understanding
-* Vector database integration
-* RAG-based documentation search
-* CI/CD integration
-* Automatic issue-to-code workflow
-* Docker-based sandbox execution
-* Multi-model fallback
-* Web interface for the agent system
-* Persistent project memory
-* Automated code patch generation
-
----
-
-##  Learning Outcomes
-
-Through this project, the following concepts are demonstrated:
-
-* Multi-agent AI systems
-* Agent orchestration
-* Agent handoffs
-* Tool calling
-* Structured AI outputs
-* LLM integration using LiteLLM
-* Software requirement analysis
-* AI-assisted coding
-* Automated code review
-* AI-assisted testing
-* Bug analysis
-* GitHub API integration
-* Conversational memory
-* Iterative software development
-
----
-
-##  Author
+## Author
 
 **Swayam Sachdeva**
-
-B.Tech Computer Science & Engineering
-
-Interested in:
-
-* Artificial Intelligence
-* Machine Learning
-* Generative AI
-* Software Development
-* AI Agents
-* Data Analytics
-
----
-
-##  Acknowledgements
-
-This project was developed as a capstone project exploring **AI agents and AI-assisted software engineering workflows**.
-
-
